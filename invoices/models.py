@@ -18,6 +18,7 @@ class Invoice(LogicalDeleteAbstractModel):
     amount = models.FloatField(blank=False)
     paid = models.BooleanField(default=False)
     # I assumed it could only be paid or not, but status choices was another option.
+    creation_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.number
