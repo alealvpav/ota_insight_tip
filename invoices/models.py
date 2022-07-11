@@ -12,6 +12,7 @@ class Invoice(LogicalDeleteAbstractModel):
         max_length=9,
         prefix="OTA-",
         alphabet="0123456789",
+        unique=True,
         # I understood only numbers were valid, but if letters are also allowed they
         # just need to be added to the alphabet string
     )
