@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Custom apps
     'money',
     'users',
+    'invoices',
     # Third-party apps
     'django_countries',
     'django_extensions',
