@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',
     # Third-party apps
     'django_countries',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
