@@ -3,7 +3,9 @@ from .models import Invoice
 
 
 class InvoiceAdmin(admin.ModelAdmin):
-    exclude = ('visible',)
+    exclude = ("visible",)
+    list_display = ("pk", "number", "user", "amount", "currency")
+    list_filter = ("user",)
 
     def has_delete_permission(self, request, obj=None):
         """
@@ -13,6 +15,11 @@ class InvoiceAdmin(admin.ModelAdmin):
         :rtype: bool
         """
         return False
+
+    def currency(self, obj):
+        return obj.user.invoice_currency.code
+
+    currency.short_desctiption = "Currency of the invoiced User"
 
 
 # Register your models here.
