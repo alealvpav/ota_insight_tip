@@ -9,6 +9,12 @@ class Currency(models.Model):
     conversion_rate = models.FloatField()
     active = models.BooleanField(default=True)
 
+    def __str__(self):
+        return f"{self.name} ({self.code})"
+
+    class Meta:
+        verbose_name_plural = "currencies"
+
     def get_value_in_dollars(self, value):
         """
         Converts the input value to USD.
