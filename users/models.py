@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models import Sum
+from django.urls import reverse
 
 from django_countries.fields import CountryField
 
@@ -23,6 +25,15 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
+    @property
+    def total_invoiced_amount(self):
+        """
+        Calculates and returns the sum of all invoices amount related to the user
+        :return: Sum of all user invoiced amounts
+        :rtype: float
+        """
+        return self.invoice_set.aggregate(Sum("amount"))["amount__sum"] or float(0)
+
     def get_full_name(self):
         """
         Returns the full name of the user composed by first_name and last_name,
@@ -31,3 +42,11 @@ class User(AbstractUser):
         :rtype: str
         """
         return " ".join([self.first_name, self.last_name]).strip()
+
+    def get_invoices_admin_url(self):
+        link = ""
+        if self.pk:
+            base_url = reverse("admin:invoices_invoice_changelist")
+            get_filter = f"?user__id__exact={self.pk}"
+            link = base_url + get_filter
+        return link

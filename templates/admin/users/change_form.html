@@ -1,0 +1,27 @@
+{% extends 'admin/change_form.html' %}
+
+{% block after_field_sets %}
+    {% if change %}
+        <div id="invoices-table-div">
+            <table id="invoices-table">
+                <tr>
+                    <th>Number</th>
+                    <th>Amount</th>
+                    <th>Paid</th>
+                </tr>
+                {% for invoice in last_invoices %}
+                    <tr>
+                        <td>{{ invoice.number }}</td>
+                        <td>{{ invoice.amount }}</td>
+                        <td>{{ invoice.paid }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <br>
+        <div id="invoices-link">
+            <a href="{{ invoices_url }}">View all {{ obj }}</a>
+        </div>
+        <br>
+    {% endif %}
+{% endblock %}
