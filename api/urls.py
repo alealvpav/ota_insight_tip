@@ -6,6 +6,6 @@ router = DefaultRouter()
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("invoices/", include("api.invoices.urls")),
+    path("", include("api.invoices.urls")),
     path("", include("api.users.urls"))
 ]
